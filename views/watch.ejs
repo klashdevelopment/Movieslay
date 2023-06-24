@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movieslay | Browse content for free</title>
+    <link rel="stylesheet" href="https://gtml.fly.dev/regular-ass-style.css">
+    <link rel="stylesheet" href="/index.css">
+    <link href="https://site-assets.fontawesome.com/releases/v6.3.0/css/all.css" rel="stylesheet"/>
+</head>
+<body>
+    <center>
+        <script src="https://cdn.jsdelivr.net/npm/@webtor/embed-sdk-js/dist/index.min.js" charset="utf-8" async></script>
+        <h1 class="bold">Movieslay | <%= movie.name %></h1>
+        <img src="<%= movie.thumbnail %>" style="height:20vh;">
+        <div class="line"></div>
+        <h4>Streaming</h4>
+        <a>Give it some time to load. <%=movie.htmlEmbedContent == ""?"It is a torrent.":"It is pure HTML embedding."%></a>
+        <div class="streaming webtor" id="player"></div>
+        <div class="line"></div>
+        <h4>Downloading & Info</h4>
+        <b>IMDB: </b> <%= movie.imdb %> <br>
+        <b>Year: </b> <%= movie.year %> <br>
+        <b>Download as Video: </b> <a href="<%= movie.download %>">download link</a> <br>
+        <script>
+            var decodeEntities = (function() {
+                // this prevents any overhead from creating the object each time
+                var element = document.createElement('div');
+
+                function decodeHTMLEntities (str) {
+                    if(str && typeof str === 'string') {
+                    // strip script/html tags
+                    str = str.replace(/<script[^>]*>([\S\s]*?)<\/script>/gmi, '');
+                    str = str.replace(/<\/?\w(?:[^"'>]|"[^"]*"|'[^']*')*>/gmi, '');
+                    element.innerHTML = str;
+                    str = element.textContent;
+                    element.textContent = '';
+                    }
+
+                    return str;
+                }
+
+                return decodeHTMLEntities;
+            })();
+        </script>
+        <script>
+            if(`<%=movie.htmlEmbedContent == ""%>`) {
+                // TORRENT
+                var torrnet = `<%=movie.torrent%>`;
+                console.log(torrnet);
+                window.webtor = window.webtor || [];
+                window.webtor.push({
+                    id: 'player',
+                    magnet: torrnet,
+                    on: function(e) {
+                        if (e.name == window.webtor.TORRENT_FETCHED) {
+                            console.log('Torrent fetched!', e.data);
+                        }
+                        if (e.name == window.webtor.TORRENT_ERROR) {
+                            console.log('Torrent error!');
+                        }
+                    },
+                    poster: '<%=movie.thumbnail%>',
+                    lang: 'en',
+                    i18n: {
+                        en: {
+                            common: {
+                                "prepare to play": "Preparing Video Stream... Please Wait...",
+                            },
+                            stat: {
+                                "seeding": "Seeding",
+                                "waiting": "Client initialization",
+                                "waiting for peers": "Waiting for peers",
+                                "from": "from",
+                            },
+                        },
+                    },
+                });
+            }else {
+                var x = decodeEntities(`<%=movie.htmlEmbedContent%>`);
+                document.querySelector('.streaming').insertAdjacentHTML('beforeend', x);
+            }
+        </script>
+    </center>
+</body>
+</html>

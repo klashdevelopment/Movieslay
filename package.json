@@ -1,0 +1,30 @@
+{
+  "name": "movieslay",
+  "version": "1.0.0",
+  "description": "An awesome movie streaming site.",
+  "main": "index.js",
+  "scripts": {
+    "test": "node .",
+    "start": "node ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/klashdevelopment/Movieslay.git"
+  },
+  "keywords": [
+    "movie",
+    "pirate",
+    "torrent",
+    "free"
+  ],
+  "author": "GavinGoGaming",
+  "license": "GPL-2.0",
+  "bugs": {
+    "url": "https://github.com/klashdevelopment/Movieslay/issues"
+  },
+  "homepage": "https://github.com/klashdevelopment/Movieslay#readme",
+  "dependencies": {
+    "ejs": "^3.1.9",
+    "express": "^4.18.2"
+  }
+}
