@@ -13,7 +13,7 @@ fetch('/movies').then(res => res.json()).then(movies => {
         elem.appendChild(icon);
         elem.appendChild(img);
         elem.addEventListener('click', () => {
-            window.location.href = '/seemovie?name=' + movie.name;
+            window.location.href = '/watch/' + movie.file;
         });
         document.querySelector('.grid-container').insertAdjacentElement('beforeend', elem);
     });
