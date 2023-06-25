@@ -1,0 +1,21 @@
+name: Deploy to Fly
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [18.x]
+    
+    steps:
+    - name: Fly GitHub Deploy
+      uses: dentarg/fly@v1.2.1
+      with:
+        fly-token: ${{ secrets.FLY_TOKEN }}
+        github-token: ${{ secrets.GITHUB_TOKEN }}
