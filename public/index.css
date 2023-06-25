@@ -33,6 +33,16 @@ html, body {
     left: 45%;
 }
 
+input {
+    padding: 10px;
+    background-color: #3c3a3a;
+    border-radius: 8px;
+    color: white;
+}
+input::placeholder {
+    color: rgb(220, 220, 220);
+}
+
 .grid-item h3 {
   margin-top: 0;
 }
