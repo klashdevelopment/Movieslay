@@ -28,7 +28,8 @@
         <img src="<%= movie.thumbnail %>" style="height:20vh;">
         <div class="line"></div>
         <h4>Streaming</h4>
-        <a>Give it some time to load. <%=movie.htmlEmbedContent == ""?"It is a torrent.":"It is pure HTML embedding."%></a>
+        <a>Give it some time to load. <%=movie.htmlEmbedContent.startsWith("_UT")?"It is a torrent.":"It is pure HTML embedding."%></a><br>
+        <a><%=movie.htmlEmbedContent.startsWith("_UT")?movie.htmlEmbedContent.substring(3):""%></a>
         <div class="streaming webtor" id="player"></div>
         <div class="line"></div>
         <h4>Downloading & Info</h4>
@@ -57,7 +58,7 @@
             })();
         </script>
         <script>
-            if(`<%=movie.htmlEmbedContent == ""%>`) {
+            if(`<%=movie.htmlEmbedContent.startsWith("_UT")%>`) {
                 // TORRENT
                 var torrnet = `<%=movie.torrent%>`;
                 console.log(torrnet);
