@@ -1,5 +1,6 @@
 var express = require('express');
 var fs = require('fs');
+var ejs = require('ejs');
 var app = express();
 var port = process.env.PORT||8080;
 
@@ -19,6 +20,14 @@ app.get('/watch/:name', (req, res) => {
     var movie = JSON.parse(fs.readFileSync(__dirname + '/public/movies/' + name + '.json', 'utf8'));
     res.render('watch.ejs', {movie: movie});
     }catch(e){
+    }
+});
+app.get('/watchlocal/:name', (req, res) => {
+    try{
+    var name = req.params.name;
+    res.end((require('./views/watchlocal')(name)));
+    }catch(e){
+        console.log(e);
     }
 });
 app.listen(port, ()=>{

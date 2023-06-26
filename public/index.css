@@ -43,6 +43,19 @@ input::placeholder {
     color: rgb(220, 220, 220);
 }
 
+button {
+  padding: 8px;
+  background-color: #444;
+  border-radius: 10px;
+  color: white;
+}
+button:hover {
+  background-color: #565656;
+}
+button:active {
+  background-color: #333;
+}
+
 .grid-item h3 {
   margin-top: 0;
 }
@@ -54,7 +67,7 @@ input::placeholder {
   box-shadow: 0px 0px 3px 5px white;
 }
 
-.grid-item i {
+.grid-item i.playbtn {
   position: absolute;
   transition: all 0.25s ease-in-out;
   top: 60%;
