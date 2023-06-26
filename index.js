@@ -22,6 +22,14 @@ app.get('/watch/:name', (req, res) => {
     }catch(e){
     }
 });
+app.get('/watchbeta/:name', (req, res) => {
+    try{
+    var name = req.params.name;
+    var movie = JSON.parse(fs.readFileSync(__dirname + '/public/movies/' + name + '.json', 'utf8'));
+    res.render('watchbeta.ejs', {movie: movie});
+    }catch(e){
+    }
+});
 app.get('/watchlocal/:name', (req, res) => {
     try{
     var name = req.params.name;
